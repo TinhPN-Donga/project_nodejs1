@@ -1,0 +1,61 @@
+<%- include('../includes/header') %>
+<br>  <section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="h5 mb-4 text-center">List Order</h3>
+                <div class="table-wrap">
+                    <table class="table">
+                      <thead class="thead-primary">
+                        <tr>
+                            <th>#</th>
+                            <th>image</th>
+                            <th>Product</th>
+                          <th>Price</th>
+                          <th>Date</th>
+                          <th>&nbsp;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- function format date -->
+                        <%function formatDatetime(datetime){const inputDate = new Date(datetime);/*inputDate.setHours(inputDate.getHours() + 7);*/const day = ('0' + inputDate.getDate()).slice(-2);const month = ('0' + (inputDate.getMonth() + 1)).slice(-2);const year = inputDate.getFullYear();const hours = ('0' + inputDate.getHours()).slice(-2);const minutes = ('0' + inputDate.getMinutes()).slice(-2);const formattedDate = `${hours}:${minutes} ${day}/${month}/${year}`;return formattedDate;}%>
+                        <%if(carts.length >=0){%>
+                          <%for(let i = 0; i < carts.length; i++){%>
+                            <tr class="alert" role="alert">
+                                <td style="display: flex; align-items: center;">
+                                    <%= i + 1%>
+                                </td>
+                                <td>
+                                    <img src='/uploads/<%=carts[i].product.image%>' width="60" height="60">
+                                </td>
+                              <td>
+                                <span><%=carts[i].product.name%></span>
+                              </td>
+                              <td>$<%=carts[i].product.price%></td>
+                              <td><%= formatDatetime(carts[i].createdAt)%></td>
+                            </tr>
+                        <%}%>
+                        <%}else{%>
+                          No Data
+                        <%}%>
+                  
+                      </tbody>
+                    </table>
+                    <div style="display: flex; justify-content: end;">
+                      <%if(countCarts > limit){%>
+                        <%for(let i = 0; i < countCarts/limit; i++){%>
+                            <%if(i == skip/limit){%>
+                                <p><%= i+1%></p>
+                            <%}else{%>
+                                <a href="/carts/my-cart?skip=<%=i+1%>" style="padding: 0 0.5rem;"><%=i+1%></a>
+                            <%}%>
+                        <%}%>    
+                      <%}%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('../includes/footer') %>

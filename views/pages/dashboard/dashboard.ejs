@@ -1,0 +1,219 @@
+<%- include('includes/header') %>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Admin Dashboard</h2>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel panel-back noti-box">
+                        <div class="text-box">
+                            <p class="main-text">Products</p>
+                            <p class="text-muted">
+                                <%= countProducts%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel panel-back noti-box">
+                        <div class="text-box">
+                            <p class="main-text">Users</p>
+                            <p class="text-muted">
+                                <%= countUsers%>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel panel-back noti-box">
+                        <div class="text-box">
+                            <p class="main-text">Carts</p>
+                            <p class="text-muted"><%= countCarts%></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="panel panel-back noti-box">
+                        <div class="text-box">
+                            <p class="main-text">...</p>
+                            <p class="text-muted">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="display: flex;justify-content: space-between;">
+                            <span style="padding-right: 2rem;">Carts</span> 
+                            <span><a href="/dashboard/manage-carts">Xem thêm</a></span>
+                        </div>
+                        <br />
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>image</th>
+                                            <th>name</th>
+                                            <th>price</th>
+                                            <th>date</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%if(carts.length !=0){%>
+                                            <%for(var i=0; i < carts.length; i++){%>
+                                                <tr>
+                                                    <td>
+                                                        <%= i+1%>
+                                                    </td>
+                                                    <td><img src=<%=carts[i].product.image ?
+                                                            `http://localhost:3000/uploads/${carts[i].product.image}`: "https://static.thenounproject.com/png/4974686-200.png"
+                                                            %>
+                                                        alt="" width="50"></td>
+                                                    <td>
+                                                        <%= carts[i].product.name%>
+                                                    </td>
+                                                    <td>$<%= carts[i].product.price%>
+                                                    </td>
+                                                    <!-- function format date -->
+                                                    <%function formatDatetime(datetime){const inputDate = new Date(datetime);/*inputDate.setHours(inputDate.getHours() + 7);*/const day = ('0' + inputDate.getDate()).slice(-2);const month = ('0' + (inputDate.getMonth() + 1)).slice(-2);const year = inputDate.getFullYear();const hours = ('0' + inputDate.getHours()).slice(-2);const minutes = ('0' + inputDate.getMinutes()).slice(-2);const formattedDate = `${hours}:${minutes} ${day}/${month}/${year}`;return formattedDate;}%>
+                                                    <td>
+                                                        <%= formatDatetime(carts[i].createdAt)%>
+                                                    </td>
+                                                    <td><a class="btn btn-info"
+                                                            href="/dashboard/products/detail/<%=carts[i].product._id%>">detail</a>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                                    <%}else{%>
+                                                        <tr>
+                                                            <td colspan="5" style="text-align: center;">No data</td>
+                                                        </tr>
+                                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="display: flex;justify-content: space-between;">
+                            <span style="padding-right: 2rem;">Products</span> 
+                            <span><a href="/dashboard/manage-products">Xem thêm</a></span>
+                        </div>
+                        <br />
+                        <span style="padding-left: 1.6rem;">
+                            <a href="/dashboard/create-product" class="btn btn-success">create</a>
+                        </span>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>image</th>
+                                            <th>name</th>
+                                            <th>price</th>
+                                            <th>action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%if(products.length !=0){%>
+                                            <%for(var i=0; i < products.length; i++){%>
+                                                <tr>
+                                                    <td>
+                                                        <%= i+1%>
+                                                    </td>
+                                                    <td><img src=<%=products[i].image ?
+                                                            `http://localhost:3000/uploads/${products[i].image}`: "https://static.thenounproject.com/png/4974686-200.png"
+                                                            %>
+                                                        alt="" width="50"></td>
+                                                    <td>
+                                                        <%= products[i].name%>
+                                                    </td>
+                                                    <td>$<%= products[i].price%>
+                                                    </td>
+                                                    <td><a class="btn btn-info"
+                                                            href="/dashboard/products/detail/<%=products[i]._id%>">detail</a>
+                                                        | <a class="btn btn-primary"
+                                                            href="/dashboard/products/edit/<%=products[i]._id%>">edit</a>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                                    <%}else{%>
+                                                        <tr>
+                                                            <td colspan="5" style="text-align: center;">No data</td>
+                                                        </tr>
+                                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            User
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%for(var i=0; i < users.length; i++){%>
+                                            <tr>
+                                                <td>
+                                                    <%= i+1%>
+                                                </td>
+                                                <td>
+                                                    <%= users[i].fullName%>
+                                                </td>
+                                                <td>
+                                                    <%= users[i].email%>
+                                                </td>
+                                                <td style="color: <%= users[i].role == "admin" ? "red" : "black" %>;">
+                                                    <%= users[i].role%>
+                                                </td>
+                                                <td>
+                                                    <%= users[i].phone ? users[i].phone:"chưa có" %>
+                                                </td>
+                                            </tr>
+                                            <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error')) {
+            alert(`error: ${urlParams.get('error')}`);
+        }
+    </script>
+    <%- include('includes/footer') %>

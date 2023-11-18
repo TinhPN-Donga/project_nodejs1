@@ -1,0 +1,24 @@
+<%- include('../includes/header') %>
+    <!-- product section -->
+    <section class="product_section layout_padding">
+      <br>
+      <br>
+       <div class="container">
+        <div class="row">
+         <div class="col-4">
+            <img style="width: 100%;" src='/uploads/<%= product.image%>' />
+        </div>
+         <div class="col-8" style="padding-left: 2rem;">
+            <h3><%= product.name%></h3>
+            <br>
+            <p>Description: <%= product.description%></p>
+            <p>Price: $<%= product.price%></p>
+            <br>
+            <form action="/carts/buy-now/<%=product._id%>" method="POST">
+               <button type="submit" class="btn btn-success">Buy Now</button>
+            </form>
+         </div>
+        </div>
+       </div>
+    </section>
+    <%- include('../includes/footer') %>

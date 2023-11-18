@@ -1,0 +1,77 @@
+<%- include('includes/header') %>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Edit Product</h2>
+                    </div>
+                </div>
+                <hr />
+                <div class="wrapper" style="display: flex; justify-content: space-between;">
+                    <div style="width: 50%;">
+                        <form action="/dashboard/products/edit/<%=product._id%>" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" value="<%= product.name%>" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Title">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label for="description">Description</label>
+                              <input type="text" value="<%= product.description%>"  name="description" class="form-control" id="description" placeholder="Description">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="number" value="<%= product.price%>"  name="price" class="form-control" id="price" placeholder="Price">
+                              </div>
+                              <br>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" value="" name="image"  class="form-control" id="inputImage" placeholder="---Image---" accept="image/*"> 
+                                <button type="button" id="remove" class="btn btn-danger mt-2">Remove</button>
+                              </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary" id="btn">Edit</button>
+                          </form>
+                    </div>
+                    <div style="width: 50%; display: flex; justify-content: center; padding: 2rem;">
+                        <img id="image" src="http://localhost:3000/uploads/<%= (product.image ? product.image: '')%>" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+
+            const fileInput = document.getElementById('inputImage');
+        
+            const image = document.getElementById('image');
+            const remove = document.getElementById('remove');
+            remove.style.display = 'none';
+        
+            fileInput.addEventListener("change", function(e){
+                const selectedFile = fileInput.files[0];
+                console.log('hihi',selectedFile);
+                if(selectedFile){
+                    const reader = new FileReader();
+                    // Đọc tệp hình ảnh và gán nó vào nguồn của thẻ img
+                    reader.onload = function(e) {
+                        image.src = e.target.result;
+                    };
+                    reader.readAsDataURL(selectedFile);
+                    remove.style.display = 'block';
+                }else{
+                    fileInput.value = null;
+                    image.src = "<%= (product.image ? '/uploads/product.image': 'https://static.thenounproject.com/png/4974686-200.png')%>"
+                }
+        
+            });
+        
+            remove.addEventListener('click', ()=>{
+                fileInput.value = null;
+                image.src = "<%= (product.image ? '/uploads/product.image': 'https://static.thenounproject.com/png/4974686-200.png')%>";
+                remove.style.display = 'none';
+            });
+        
+        </script>
+<%- include('includes/footer') %>

@@ -1,0 +1,62 @@
+<%- include('includes/header') %>
+  <!-- product section -->
+  <section class="product_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our <span>products</span>
+        </h2>
+      </div>
+      <div class="row">
+      
+        <%if(products){%>
+          <%if(products.length > 0){%>
+              <%for(var p of products){%>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                  <div class="box">
+                    <div class="option_container">
+                      <div class="options">
+                        <a href="/detail-product/<%= p._id%>" class="option1">
+                          Detail
+                        </a>
+                        <form action="/carts/buy-now/<%=p._id%>" method="POST">
+                          <button type="submit" class="btn btn-success">Buy Now</button>
+                       </form>
+                      </div>
+                    </div>
+                    <div class="img-box">
+                      <img src=<%= p.image ? `http://localhost:3000/uploads/${p.image}`:"https://static.thenounproject.com/png/4974686-200.png"%> alt="">
+                    </div>
+                    <div class="detail-box">
+                      <h5>
+                        <%= p.name%>
+                      </h5>
+                      <h6>
+                        $<%= p.price%>
+                      </h6>
+                    </div>
+                    <p style="display: block;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      overflow: hidden;">Mô tả: <%= p.description%></p>
+                  </div>
+                </div>
+              <%}%>
+          <%}else{%>
+            <p style="display: block; text-align: center; font-size: 32px;">No Product</p>
+          <%}%>
+        <%}else{%>
+          <p style="display: block; text-align: center; font-size: 32px;">No Product</p>
+        <%}%>
+      </div>
+      <%if(products && products.length > 0){%>
+        <div class="btn-box">
+          <a href="/products">
+            View All products
+          </a>
+        </div>
+       <%}%>
+      
+    </div>
+  </section>
+<%- include('includes/footer') %>

@@ -1,0 +1,66 @@
+<%- include('../includes/header') %>
+  <!-- product section -->
+  <section class="product_section layout_padding">
+    <div class="container">
+      <hr/>
+      <p>Nhập từ khóa: </p>
+      <form method="GET" action="/search">
+        <div class="row">
+          <div class="col-4">
+            <input type="text"  class="form-control" name="search" placeholder="Nhập từ khóa..."/>
+          </div>
+          <div class="col-8">
+            <input type="submit" class="btn btn-primary" value="Search"/>
+          </div>
+        </div>
+      </form>
+      <br/>
+      <br/>
+      <h3 >Từ khóa: <i><%if(search){%><%=search%><%}%></i></h3>
+      <div class="row">
+        <%if(products){%>
+          <%if(products.length > 0){%>
+              <%for(var p of products){%>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                  <div class="box">
+                    <div class="option_container">
+                      <div class="options">
+                        <a href="/detail-product/<%= p._id%>" class="option1">
+                          Detail
+                        </a>
+                        <!-- <a href="" class="option2">
+                          Buy Now
+                        </a> -->
+                        <form action="/carts/buy-now/<%=p._id%>" method="POST">
+                          <button type="submit" class="btn btn-success">Buy Now</button>
+                       </form>
+                      </div>
+                    </div>
+                    <div class="img-box">
+                      <img src=<%= p.image ? `http://localhost:3000/uploads/${p.image}`:"https://static.thenounproject.com/png/4974686-200.png"%> alt="">
+                    </div>
+                    <div class="detail-box">
+                      <h5>
+                        <%= p.name%>
+                      </h5>
+                      <h6>
+                        $<%= p.price%>
+                      </h6>
+                    </div>
+                    <p style="display: block;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      overflow: hidden;">Mô tả: <%= p.description%></p>
+                  </div>
+                </div>
+              <%}%>
+          <%}else{%>
+            <p style="display: block; text-align: center; font-size: 32px;padding: 1rem 0">Không tìm thấy sản phẩm</p>
+          <%}%>
+        <%}else{%>
+          <p style="display: block; text-align: center; font-size: 32px;padding: 1rem 0">Không tìm thấy sản phẩm</p>
+        <%}%>
+      </div>
+    </div>
+  </section>
+<%- include('../includes/footer') %>

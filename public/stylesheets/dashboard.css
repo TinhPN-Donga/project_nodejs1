@@ -1,0 +1,49 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+#wrapper {
+  width: 100%;
+  background: #202020;
+}
+#page-wrapper {
+  padding: 15px 15px;
+  min-height: 600px;
+  background: #f3f3f3;
+}
+.noti-box {
+  min-height: 100px;
+  padding: 20px;
+}
+.main-text {
+  font-size: 25px;
+  font-weight: 600;
+}
+.bg-color-red {
+  background-color: #db0630;
+  color: #fff;
+}
+.active-menu {
+  background-color: #c90000 !important;
+}
+.sidebar-collapse .nav > li > a {
+  color: #fff;
+  background: #202020;
+  text-shadow: none;
+}
+.sidebar-collapse > .nav > li > a {
+  padding: 15px 10px;
+}
+.navbar-side {
+  border: none;
+  background-color: #202020;
+}
+.navbar-side {
+  z-index: 1;
+  position: absolute;
+  width: 260px;
+}
+#page-wrapper {
+  margin: 0 0 0 260px;
+  padding: 15px 30px;
+  min-height: 1200px;
+}
