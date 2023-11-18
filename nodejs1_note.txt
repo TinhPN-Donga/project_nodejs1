@@ -1,0 +1,37 @@
+NodeJS 1: (Express.js)
+Bài 10. Tạo trang login/register
+- Viết doc hướng dẫn *
+- Slide *
+- Ra video sơ sơ (làm sau)
+Bài 11: Tạo API thêm xóa/sửa/ sản phẩm 
+- Viết doc hướng dẫn *
+- Slide *
+- Ra video sơ sơ (làm sau)
+Bài 12: Admin call api tạo sản phẩm 
+- Design Admin
+- Viết doc hướng dẫn *
+- Slide *
+- Ra video sơ sơ (làm sau)
+Bài 13: Call api View sản phẩm và mua hàng
+- Design Client view sản
+- Viết doc hướng dẫn *
+- Slide *
+- Ra video sơ sơ (làm sau)
+Tính năng:
+ - home: trang chủ
+ - profile: trang cá nhân
+ -  product: tất cả product
+ - buy product : mua hàng
+ - my cart : giỏ hàng của tôi
+Bài 14: Add paginate and other feature
+- Viết doc hướng dẫn *
+- Slide *
+- Ra video sơ sơ (làm sau)
+Tính năng:
+ - manage cart in dashboard
+ - thay đổi avatar
+ - search product
+ - skip và limit trong my-cart , manage cart in dashboard
+ - ... tính năng khác
+Bài 15: Bảo vệ sản phẩm.
+- List tiêu chí
